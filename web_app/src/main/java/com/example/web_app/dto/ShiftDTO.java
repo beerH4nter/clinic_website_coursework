@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Setter
 @ToString
-public class ShiftRequest {
+public class ShiftDTO {
     @NotEmpty(message = "Date cannot be empty")
     @Pattern(regexp = "^(0[1-9]|[12][0-9]|3[01])\\.(0[1-9]|1[0-2])\\.((19|20)\\d{2})$", message = "Invalid date format (dd.MM.yyyy)")
     private String date;
@@ -28,5 +28,7 @@ public class ShiftRequest {
     private String lunchTime;
 
     private int doctorId; // ID доктора, связанного с этим сменой
+
+    private String doctorSurname;
 
 }
