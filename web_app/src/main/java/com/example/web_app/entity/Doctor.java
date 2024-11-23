@@ -6,7 +6,10 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "doctors")
@@ -45,6 +48,7 @@ public class Doctor {
 
     @Column(name = "date_of_birth")
     @NotEmpty(message = "Can not be empty")
+    @Pattern(regexp = "^(0[1-9]|[12][0-9]|3[01])\\.(0[1-9]|1[0-2])\\.((19|20)\\d{2})$")
     private String dateOfBirth;
 
     @Email
@@ -57,6 +61,9 @@ public class Doctor {
     @Size(min = 3, max = 50, message = "Wrong size of column")
     @NotEmpty(message = "Can not be empty")
     private String password;
+
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Shift> shifts;
 
 
 
