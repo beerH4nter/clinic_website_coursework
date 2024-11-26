@@ -5,6 +5,7 @@ import javax.validation.constraints.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "patients")
@@ -50,5 +51,8 @@ public class Patient {
     @Size(min = 3, max = 50, message = "Wrong size of column")
     @NotEmpty(message = "Can not be empty")
     private String password;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Test> tests;
 
 }

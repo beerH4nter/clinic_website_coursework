@@ -1,5 +1,6 @@
 package com.example.web_app.entity;
 
+import com.example.web_app.converter.StatusConverter;
 import com.example.web_app.enums.Status;
 import lombok.*;
 
@@ -39,7 +40,8 @@ public class Test {
     private String time;
 
     @Column(name = "status")
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = StatusConverter.class)
+    @NotEmpty(message = "Status can not be empty")
     private Status status;
 
     @Column(name = "result")

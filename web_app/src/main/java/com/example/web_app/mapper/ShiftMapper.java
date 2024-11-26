@@ -4,16 +4,13 @@ import com.example.web_app.dto.ShiftDTO;
 import com.example.web_app.entity.Doctor;
 import com.example.web_app.entity.Shift;
 import com.example.web_app.repositories.DoctorsRepository;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class ShiftMapper {
 
     private static DoctorsRepository doctorsRepository;
 
-    public ShiftMapper(DoctorsRepository doctorsRepository) {
-        ShiftMapper.doctorsRepository = doctorsRepository;
-    }
-
-    // Из Shift в ShiftResponse
     public static Shift toRequest(ShiftDTO shiftDTO) {
 
         Doctor doctor = doctorsRepository.findById(shiftDTO.getDoctorId()).orElseThrow(() ->
