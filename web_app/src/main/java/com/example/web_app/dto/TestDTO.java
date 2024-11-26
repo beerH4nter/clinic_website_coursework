@@ -25,7 +25,6 @@ public class TestDTO {
     @Pattern(regexp = "^([01]\\d|2[0-3]):([0-5]\\d)$", message = "Invalid time format (HH:mm)")
     private String time;
 
-    @NotEmpty(message = "status can not be empty")
     @Convert(converter = StatusConverter.class)
     private Status status;
 

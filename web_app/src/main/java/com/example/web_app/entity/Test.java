@@ -41,7 +41,6 @@ public class Test {
 
     @Column(name = "status")
     @Convert(converter = StatusConverter.class)
-    @NotEmpty(message = "Status can not be empty")
     private Status status;
 
     @Column(name = "result")

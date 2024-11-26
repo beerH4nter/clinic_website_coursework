@@ -1,6 +1,7 @@
 package com.example.web_app.enums;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -14,6 +15,8 @@ public enum Status {
 
     private final String context;
 
+
+    @JsonCreator
     public static Status fromValue(String value) {
         for (Status color : values()) {
             if (color.getContext().equalsIgnoreCase(value)) {

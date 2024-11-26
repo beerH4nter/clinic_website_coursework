@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository
 public interface PatientsRepository extends JpaRepository<Patient, Integer> {
 
-
     Optional<Patient> findByName(String name);
 
 }

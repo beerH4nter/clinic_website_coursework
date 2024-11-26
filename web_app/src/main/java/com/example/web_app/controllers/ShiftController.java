@@ -19,16 +19,18 @@ import java.util.stream.Collectors;
 @RequestMapping("/shift")
 public class ShiftController {
     private final ShiftService shiftService;
+    private final ShiftMapper shiftMapper;
 
     @Autowired
-    public ShiftController(ShiftService shiftService, DoctorsRepository doctorsRepository) {
+    public ShiftController(ShiftService shiftService, DoctorsRepository doctorsRepository, ShiftMapper shiftMapper) {
         this.shiftService = shiftService;
+        this.shiftMapper = shiftMapper;
     }
 
     @PostMapping("/save")
     public Shift saveShift(@RequestBody @Valid ShiftDTO shiftDTO){
 
-        Shift shift = ShiftMapper.toRequest(shiftDTO);
+        Shift shift = shiftMapper.toRequest(shiftDTO);
 
         shiftService.save(shift);
         return shift;
@@ -38,7 +40,11 @@ public class ShiftController {
     public ResponseEntity<?> getAllShifts() {
         try{
             List<Shift> shifts = shiftService.findAll();
-            return ResponseEntity.ok(shifts);
+            List<ShiftDTO> shiftDTOS = shifts.stream()
+                    .map(shiftMapper::toResponse) // Применяем метод маппера
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(shiftDTOS);
+
         }catch (ClassCastException e){
             return ResponseEntity.ok(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error with shifts data"));
         }catch (Exception e){
@@ -51,10 +57,10 @@ public class ShiftController {
     public ResponseEntity<?> findAllShiftsByDoctorId(@RequestParam int id){
         try {
             List<Shift> shifts = shiftService.findAllShiftsByDoctorId(id);
-            List<ShiftDTO> shiftResponses = shifts.stream()
-                    .map(ShiftMapper::toResponse) // Применяем метод маппера
+            List<ShiftDTO> shiftDTOS = shifts.stream()
+                    .map(shiftMapper::toResponse) // Применяем метод маппера
                     .collect(Collectors.toList());
-            return ResponseEntity.ok(shiftResponses);
+            return ResponseEntity.ok(shiftDTOS);
 
         }catch (ClassCastException e){
             return ResponseEntity.ok(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error with shifts data"));
