@@ -21,7 +21,7 @@ public class PatientMapper {
 
     public Patient toRequest(PatientDTO patientDTO) {
 
-        List<Test> tests = testsRepository.findAllById(patientDTO.getTestsId());
+//        List<Test> tests = testsRepository.findAllById(patientDTO.getTestsId());
 
         Patient patient = new Patient();
 
@@ -29,7 +29,9 @@ public class PatientMapper {
         patient.setSurname(patientDTO.getSurname());
         patient.setPatronymic(patientDTO.getPatronymic());
         patient.setDateOfBirth(patientDTO.getDateOfBirth());
-        patient.setTests(tests);
+        patient.setEmail(patientDTO.getEmail());
+        patient.setPassword(patientDTO.getPassword());
+//        patient.setTests(tests);
         return patient;
 
     }

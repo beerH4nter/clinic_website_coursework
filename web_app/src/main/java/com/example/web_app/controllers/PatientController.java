@@ -1,25 +1,17 @@
 package com.example.web_app.controllers;
 
-import com.example.web_app.dto.DoctorDTO;
 import com.example.web_app.dto.PatientDTO;
-import com.example.web_app.entity.Doctor;
 import com.example.web_app.entity.Patient;
 import com.example.web_app.mapper.PatientMapper;
-import com.example.web_app.service.DoctorService;
 import com.example.web_app.service.PatientService;
 import javax.validation.Valid;
 
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.Binding;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -63,10 +55,10 @@ public class PatientController {
 
     }
 
-    @GetMapping("/findOne")
-    public ResponseEntity<?> findOneByName(@RequestParam String name){
+    @GetMapping("/findById")
+    public ResponseEntity<?> findOneById(@RequestParam int id){
         try{
-            Patient patient = patientService.findOneByName(name);
+            Patient patient = patientService.findOneById(id);
             PatientDTO patientDTO = patientMapper.toResponse(patient);
             return ResponseEntity.ok(patientDTO);
         }catch(ClassCastException e){

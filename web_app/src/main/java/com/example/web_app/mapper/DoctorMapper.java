@@ -24,7 +24,7 @@ public class DoctorMapper {
 
     public Doctor toRequest(DoctorDTO doctorDTO) {
 
-        List<Shift> shifts = shiftsRepository.findAllById(doctorDTO.getShiftsId());
+//        List<Shift> shifts = shiftsRepository.findAllById(doctorDTO.getShiftsId());
 
         Doctor doctor = new Doctor();
 
@@ -35,7 +35,7 @@ public class DoctorMapper {
         doctor.setDateOfBirth(doctorDTO.getDateOfBirth());
         doctor.setEmail(doctorDTO.getEmail());
         doctor.setPassword(doctorDTO.getPassword());
-        doctor.setShifts(shifts);
+//        doctor.setShifts(shifts);
 
         return doctor;
 

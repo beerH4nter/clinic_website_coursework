@@ -39,6 +39,10 @@ public class PatientService {
         return patientsRepository.findAll();
     }
 
+    public Patient findOneById(int id){
+        return patientsRepository.findById(id).orElse(null);
+    }
+
     public  Patient findOneByName(String name){
         return patientsRepository.findByName(name).orElse(null);
     }
