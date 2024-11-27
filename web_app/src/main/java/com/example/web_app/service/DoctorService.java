@@ -1,6 +1,7 @@
 package com.example.web_app.service;
 
 import com.example.web_app.entity.Doctor;
+import com.example.web_app.entity.Patient;
 import com.example.web_app.repositories.DoctorsRepository;
 import com.example.web_app.repositories.PatientsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,10 @@ import java.util.List;
 public class DoctorService {
 
     private final DoctorsRepository doctorsRepository;
-    private final PatientsRepository patientsRepository;
 
     @Autowired
-    public DoctorService(DoctorsRepository doctorsRepository, PatientsRepository patientsRepository) {
+    public DoctorService(DoctorsRepository doctorsRepository) {
         this.doctorsRepository = doctorsRepository;
-        this.patientsRepository = patientsRepository;
     }
 
 
@@ -50,6 +49,9 @@ public class DoctorService {
         return doctorsRepository.findByName(name).orElse(null);
     }
 
+    public Doctor findOneById(int id){
+        return doctorsRepository.findById(id).orElse(null);
+    }
 
 
 }

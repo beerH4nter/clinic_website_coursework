@@ -36,14 +36,14 @@ public class TestMapper {
     }
 
     public TestDTO toResponse(Test test){
-        TestDTO response = new TestDTO();
-        response.setName(test.getName());
-        response.setDate(test.getDate());
-        response.setTime(test.getTime());
-        response.setStatus(test.getStatus());
-        response.setResult(test.getResult());
-        response.setPatientSurname(test.getPatient().getSurname());
-        return response;
+        TestDTO testDTO = new TestDTO();
+        testDTO.setName(test.getName());
+        testDTO.setDate(test.getDate());
+        testDTO.setTime(test.getTime());
+        testDTO.setStatus(test.getStatus());
+        testDTO.setResult(test.getResult());
+        testDTO.setPatientSurname(test.getPatient().getSurname());
+        return testDTO;
 
     }
 

@@ -54,10 +54,10 @@ public class DoctorController {
         }
     }
 
-    @GetMapping("/findOneByName")
-    public ResponseEntity<?> findOneByName(@RequestParam String name){
+    @GetMapping("/findById")
+    public ResponseEntity<?> findOneById(@RequestParam int id){
         try{
-            Doctor doctor = doctorService.findOneByName(name);
+            Doctor doctor = doctorService.findOneById(id);
             DoctorDTO doctorDTO = doctorMapper.toResponse(doctor);
             return ResponseEntity.ok(doctorDTO);
         }catch (ClassCastException e){
