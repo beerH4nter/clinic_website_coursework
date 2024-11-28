@@ -1,9 +1,7 @@
 package com.example.web_app.controllers;
 
 import com.example.web_app.dto.DiseaseDTO;
-import com.example.web_app.dto.DoctorDTO;
 import com.example.web_app.entity.Disease;
-import com.example.web_app.entity.Doctor;
 import com.example.web_app.mapper.DiseaseMapper;
 import com.example.web_app.service.DiseaseService;
 import org.springframework.beans.factory.annotation.Autowired;
