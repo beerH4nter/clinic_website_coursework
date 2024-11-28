@@ -1,7 +1,9 @@
 package com.example.web_app.mapper;
 
 import com.example.web_app.dto.PatientDTO;
+import com.example.web_app.entity.Appointment;
 import com.example.web_app.entity.Patient;
+import com.example.web_app.entity.Prescription;
 import com.example.web_app.entity.Test;
 import com.example.web_app.repositories.TestsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,8 @@ public class PatientMapper {
         patientDTO.setEmail(patient.getEmail());
         patientDTO.setPassword(patient.getPassword());
         patientDTO.setTestsId(patient.getTests().stream().map(Test::getId).collect(Collectors.toList()));
+        patientDTO.setAppointmentsId(patient.getAppointments().stream().map(Appointment::getId).collect(Collectors.toList()));
+        patientDTO.setPrescriptionsId(patient.getPrescriptions().stream().map(Prescription::getId).collect(Collectors.toList()));
 
         return patientDTO;
 

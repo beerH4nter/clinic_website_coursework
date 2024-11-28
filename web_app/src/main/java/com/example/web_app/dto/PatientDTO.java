@@ -35,4 +35,9 @@ public class PatientDTO {
 
     private List<Integer> testsId;
 
+    private List<Integer> prescriptionsId;
+
+    private List<Integer> appointmentsId;
+
+
 }

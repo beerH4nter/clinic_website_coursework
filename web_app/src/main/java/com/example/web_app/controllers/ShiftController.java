@@ -1,7 +1,6 @@
 package com.example.web_app.controllers;
 
 import com.example.web_app.dto.ShiftDTO;
-import com.example.web_app.entity.Doctor;
 import com.example.web_app.entity.Shift;
 import com.example.web_app.mapper.ShiftMapper;
 import com.example.web_app.repositories.DoctorsRepository;

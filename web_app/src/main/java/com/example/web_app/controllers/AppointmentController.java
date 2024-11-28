@@ -85,7 +85,7 @@ public class AppointmentController {
             return ResponseEntity.ok(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error"));
         }
     }
-
+    
     @GetMapping("/findByDisease")
     public ResponseEntity<?> findAllAppointmentsByDiseaseId(@RequestParam int id){
         try {

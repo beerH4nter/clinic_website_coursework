@@ -40,4 +40,8 @@ public class DoctorDTO {
 
     private List<Integer> shiftsId;
 
+    private List<Integer> appointmentsId;
+
+    private List<Integer> prescriptionsId;
+
 }

@@ -37,6 +37,7 @@ public class AppointmentDTO {
     @NotEmpty(message = "drugs can not be empty")
     private String drugs;
 
+
     private String doctorNotes;
 
     private int patientId;
