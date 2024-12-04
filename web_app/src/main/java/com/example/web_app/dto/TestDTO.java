@@ -1,18 +1,19 @@
 package com.example.web_app.dto;
 
 import com.example.web_app.converter.StatusConverter;
+import com.example.web_app.entity.Test;
 import com.example.web_app.enums.Status;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.Convert;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class TestDTO {
     @NotEmpty(message = "name cannot be empty")
     private String name;
@@ -34,5 +35,6 @@ public class TestDTO {
     private int patientId;
 
     private String patientSurname;
+
 
 }

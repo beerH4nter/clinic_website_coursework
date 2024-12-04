@@ -9,8 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "patients")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -33,7 +31,6 @@ public class Patient {
 
     @Column(name = "patronymic")
     @Size(min = 3, max = 50, message = "Wrong size of column")
-    @NotEmpty(message = "Can not be empty")
     private String patronymic;
 
     @Column(name = "date_of_birth")

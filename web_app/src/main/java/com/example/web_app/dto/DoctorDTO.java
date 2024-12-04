@@ -2,6 +2,7 @@ package com.example.web_app.dto;
 
 import com.example.web_app.converter.StatusConverter;
 import com.example.web_app.enums.Status;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,9 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class DoctorDTO {
 
     @NotEmpty(message = "name cannot be empty")
@@ -22,7 +21,6 @@ public class DoctorDTO {
     @NotEmpty(message = "surname can not be empty")
     private String surname;
 
-    @NotEmpty(message = "patronymic can not be empty")
     private String patronymic;
 
     @NotEmpty(message = "position can not be empty")

@@ -52,7 +52,7 @@ public class TestController {
         }
     }
 
-    @GetMapping("findAllByPatient")
+    @GetMapping("findByPatient")
     public ResponseEntity<?> getAllTestsByPatientId(int id){
         try{
             List<Test> tests = testService.findAllTestsByPatientId(id);
@@ -61,7 +61,7 @@ public class TestController {
                     .map(testMapper::toResponse)
                     .collect(Collectors.toList());
 
-            return ResponseEntity.ok(tests);
+            return ResponseEntity.ok(testDTOS);
         }catch(ClassCastException e){
             return ResponseEntity.ok(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error with tests data"));
         }catch (Exception e){

@@ -13,8 +13,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "doctors")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -38,7 +36,6 @@ public class Doctor {
 
     @Column(name = "patronymic")
     @Size(min = 3, max = 50, message = "Wrong size of column")
-    @NotEmpty(message = "Can not be empty")
     private String patronymic;
 
     @Column(name = "position")

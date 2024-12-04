@@ -1,6 +1,7 @@
 package com.example.web_app.dto;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,9 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class PatientDTO {
 
     @NotEmpty(message = "name can not be empty")
@@ -20,7 +19,6 @@ public class PatientDTO {
     @NotEmpty(message = "surname can not be empty")
     private String surname;
 
-    @NotEmpty(message = "patronymic can not be empty")
     private String patronymic;
 
     @NotEmpty(message = "date of birth cannot be empty")

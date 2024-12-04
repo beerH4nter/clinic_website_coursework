@@ -9,6 +9,7 @@
         "@testing-library/user-event": "^13.5.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
+        "react-router-dom": "^7.0.2",
         "react-scripts": "5.0.1",
         "web-vitals": "^2.1.4"
     },
@@ -17,6 +18,11 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
+    },
+    "scripts": {
+        "build": "react-scripts build",
+        "move:static": "xcopy /E /I /Y build\\* C:\\Учёба\\Курсач\\web_app\\src\\main\\resources\\static",
+        "deploy": "npm run build && npm run move:static"
     },
     "eslintConfig": {
         "extends": [
@@ -35,5 +41,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "cpy": "^11.1.0"
     }
 }

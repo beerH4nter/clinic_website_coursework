@@ -14,12 +14,9 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "appointments")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@ToString
 public class Appointment {
 
     @Id

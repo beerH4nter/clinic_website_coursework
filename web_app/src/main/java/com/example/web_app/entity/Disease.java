@@ -11,12 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "diseases")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@ToString
 public class Disease {
     @Id
     @Column(name = "id")

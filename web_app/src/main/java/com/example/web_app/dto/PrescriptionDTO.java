@@ -2,6 +2,7 @@ package com.example.web_app.dto;
 
 import com.example.web_app.entity.Doctor;
 import com.example.web_app.entity.Patient;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,9 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class PrescriptionDTO {
 
     @NotEmpty

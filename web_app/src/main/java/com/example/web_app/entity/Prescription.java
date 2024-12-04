@@ -10,8 +10,6 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "prescriptions")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

@@ -4,6 +4,7 @@ import com.example.web_app.converter.ReasonConverter;
 import com.example.web_app.converter.StatusConverter;
 import com.example.web_app.enums.Reason;
 import com.example.web_app.enums.Status;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,9 +13,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class AppointmentDTO {
 
     @NotEmpty(message = "date can not be empty")

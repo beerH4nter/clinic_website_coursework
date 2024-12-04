@@ -52,4 +52,8 @@ public class AppointmentService {
     public List<Appointment> findAllByDiseaseId(int id){
         return appointmentsRepository.findAppointmentsByDiseaseId(id);
     }
+
+    public List<Appointment> findAllByDate(String date){
+        return appointmentsRepository.findAppointmentsByDate(date);
+    }
 }

@@ -9,8 +9,6 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "shifts")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
