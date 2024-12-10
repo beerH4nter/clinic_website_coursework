@@ -47,6 +47,10 @@ public class PatientService {
         return patientsRepository.findByName(name).orElse(null);
     }
 
+    public Patient findOneByEmail(String email){
+        return patientsRepository.findByEmail(email).orElse(null);
+    }
+
 
 
 }

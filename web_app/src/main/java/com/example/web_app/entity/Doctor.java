@@ -2,6 +2,7 @@ package com.example.web_app.entity;
 
 
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -48,8 +49,9 @@ public class Doctor {
     @Pattern(regexp = "^(0[1-9]|[12][0-9]|3[01])\\.(0[1-9]|1[0-2])\\.((19|20)\\d{2})$")
     private String dateOfBirth;
 
+    @UniqueElements
     @Email
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @Size(min = 3, max = 50, message = "Wrong size of column")
     @NotEmpty(message = "Can not be empty")
     private String email;

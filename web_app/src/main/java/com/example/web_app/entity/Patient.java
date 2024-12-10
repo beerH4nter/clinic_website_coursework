@@ -3,6 +3,7 @@ package com.example.web_app.entity;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.Date;
 import java.util.List;
@@ -38,6 +39,7 @@ public class Patient {
     @Pattern(regexp = "^(0[1-9]|[12][0-9]|3[01])\\.(0[1-9]|1[0-2])\\.((19|20)\\d{2})$")
     private String dateOfBirth;
 
+    @UniqueElements
     @Email(message = "not format email")
     @Column(name = "email", unique = true)
     @Size(min = 3, max = 50, message = "Wrong size of column")

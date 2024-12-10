@@ -1,10 +1,9 @@
 import React from "react";
-import RegistrationPatient from "../../components/RegistrationPatient";
+import RegistrationPatient from "../../components/registration/RegistrationPatient";
 
 const RegistrationPage = () => {
     return (
         <div style={styles.container}>
-            <h1>Регистрация</h1>
             <RegistrationPatient />
         </div>
     );

@@ -62,12 +62,28 @@ public class PatientController {
             PatientDTO patientDTO = patientMapper.toResponse(patient);
             return ResponseEntity.ok(patientDTO);
         }catch(ClassCastException e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error with doctors data");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error with patients data");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error");
         }
     }
+
+    @GetMapping("/findByEmail")
+    public ResponseEntity<?> findOneByEmail(@RequestParam String email){
+        try{
+            Patient patient = patientService.findOneByEmail(email);
+            PatientDTO patientDTO = patientMapper.toResponse(patient);
+            return ResponseEntity.ok(patientDTO);
+        }catch(ClassCastException e){
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error with patients data");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Server error");
+        }
+    }
+
 
 
 
