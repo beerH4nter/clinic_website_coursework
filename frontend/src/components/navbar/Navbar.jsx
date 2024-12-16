@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Button, Dialog, TextField, Box } from "@mui/material";
+import { useUser } from "../../context/UserContext";
 
 const Navbar = () => {
     const [isAuth, setIsAuth] = useState(false);
@@ -8,6 +9,7 @@ const Navbar = () => {
     const [loginData, setLoginData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { setUser } = useUser(); // Получаем setUser из контекста
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -18,19 +20,17 @@ const Navbar = () => {
         try {
             const response = await fetch(`http://localhost:8080/patient/findByEmail?email=${loginData.email}`);
             if (response.ok) {
-                const user = await response.json();
-                if (user.password === loginData.password) {
-                    setIsAuth(true);
-                    setOpen(false);
-                    navigate("/profile");
-                } else {
-                    setError("Неверный пароль.");
-                }
+                const userData = await response.json();
+                setUser(userData); // Устанавливаем пользователя в контексте
+                setIsAuth(true); // Устанавливаем состояние авторизации
+                setOpen(false); // Закрываем диалог авторизации
+                navigate("/profile");
             } else {
-                setError("Пользователь не найден.");
+                setError("Неверный email или пароль");
             }
-        } catch (err) {
-            setError("Ошибка сети. Попробуйте позже.");
+        } catch (error) {
+            setError("Сетевая ошибка. Попробуйте позже.");
+            console.error("Сетевая ошибка:", error);
         }
     };
 

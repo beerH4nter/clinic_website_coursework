@@ -1,16 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes/AppRoutes";
-import Navbar from "./components/navbar/Navbar"; // Подключаем Navbar
+import Navbar from "./components/navbar/Navbar";
+import { UserContextProvider } from "./context/UserContext"; // Исправленный импорт
 
 const App = () => {
     return (
-        <Router>
-            {/* Глобальный Navbar */}
-            <Navbar />
-            {/* Подключение маршрутов */}
-            <AppRoutes />
-        </Router>
+        <UserContextProvider>
+            <Router>
+                <Navbar />
+                <AppRoutes />
+            </Router>
+        </UserContextProvider>
     );
 };
 
