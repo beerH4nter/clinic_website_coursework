@@ -1,59 +1,38 @@
 package com.example.web_app.service;
 
+
+import com.example.web_app.dto.AppointmentItemListDTO;
 import com.example.web_app.entity.Appointment;
 import com.example.web_app.repositories.AppointmentsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class AppointmentService {
-    private final AppointmentsRepository appointmentsRepository;
 
-    @Autowired
-    public AppointmentService(AppointmentsRepository appointmentsRepository) {
-        this.appointmentsRepository = appointmentsRepository;
+    private final AppointmentsRepository repository;
+
+    private AppointmentItemListDTO mapToAppointmentDTO(Appointment appointment){
+        return AppointmentItemListDTO.builder()
+                .id(appointment.getId())
+                .dateTime(appointment.getDateTime())
+                .reason(appointment.getReason().getContext())
+                .status(appointment.getStatus().getContext())
+                .build();
     }
 
-    @Transactional
-    public void save(Appointment appointment){
-        appointmentsRepository.save(appointment);
-    }
 
-    @Transactional
-    public void delete(int id){
-        appointmentsRepository.deleteById(id);
-    }
-
-    @Transactional
-    public void update(int id, Appointment appointment){
-        appointment.setId(id);
-        appointmentsRepository.save(appointment);
-    }
-
-    public List<Appointment> findAll(){
-        return appointmentsRepository.findAll();
-    }
-
-    public Appointment findOneById(int id){
-        return appointmentsRepository.findById(id).orElse(null);
-    }
-
-    public List<Appointment> findAllByPatientId(int id){
-        return appointmentsRepository.findAppointmentsByPatientId(id);
-    }
-
-    public List<Appointment> findAllByDoctorId(int id){
-        return appointmentsRepository.findAppointmentsByDoctorId(id);
-    }
-
-    public List<Appointment> findAllByDiseaseId(int id){
-        return appointmentsRepository.findAppointmentsByDiseaseId(id);
-    }
-
-    public List<Appointment> findAllByDate(String date){
-        return appointmentsRepository.findAppointmentsByDate(date);
+    public List<AppointmentItemListDTO> getAllByPatient(Long id) {
+        return repository.findAllByPatientId(id).stream()
+                .map(this::mapToAppointmentDTO)
+                .collect(Collectors.toList());
     }
 }

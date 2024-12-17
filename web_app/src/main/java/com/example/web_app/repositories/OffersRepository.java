@@ -1,11 +1,10 @@
 package com.example.web_app.repositories;
 
+import com.example.web_app.entity.Offer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface ShiftsRepository extends JpaRepository<Shift, Integer> {
-    List<Shift> findShiftsByDoctorId(int id);
+public interface OffersRepository extends JpaRepository<Offer, Long> {
+
 }

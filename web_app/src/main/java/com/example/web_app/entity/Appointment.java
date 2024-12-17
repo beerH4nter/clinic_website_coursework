@@ -1,68 +1,57 @@
 package com.example.web_app.entity;
 
-
 import com.example.web_app.converter.ReasonConverter;
 import com.example.web_app.converter.StatusConverter;
 import com.example.web_app.enums.Reason;
 import com.example.web_app.enums.Status;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "appointments")
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 public class Appointment {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
-    @Column(name = "date")
-    @NotEmpty(message = "date can not be empty")
-    @Pattern(regexp = "^(0[1-9]|[12][0-9]|3[01])\\.(0[1-9]|1[0-2])\\.((19|20)\\d{2})$")
-    private String date;
+    @NotEmpty(message = "date or time can not be empty")
+    private LocalDateTime dateTime;
 
-    @Column(name = "time")
-    @NotEmpty(message = "time can not be empty")
-    @Pattern(regexp = "^([01]\\d|2[0-3]):([0-5]\\d)$")
-    private String time;
-
-    @Column(name = "status")
-    @Convert(converter = StatusConverter.class)
-    private Status status;
-
-    @Column(name = "reason")
     @Convert(converter = ReasonConverter.class)
+    @NotEmpty(message = "reason can not be empty")
     private Reason reason;
 
-    @Column(name = "diagnose")
-    @NotEmpty(message = "diagnose can not be empty")
+    @Convert(converter = StatusConverter.class)
+    @NotEmpty(message = "status can not be empty")
+    private Status status;
+
+    @NotEmpty(message = "diagnose can noe be empty")
+    @Column(length = 512)
     private String diagnose;
 
-    @Column(name = "drugs")
-    @NotEmpty(message = "drugs can not be empty")
-    private String drugs;
-
-    @Column(name = "doctor_notes")
     private String doctorNotes;
 
+    @Column(length = 512)
+    private String drugs;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "patientId")
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
+    @JoinColumn(name = "doctorId")
     private Doctor doctor;
 
-    @ManyToOne
-    @JoinColumn(name = "disease_id", nullable = true)
-    private Disease disease;
 }
