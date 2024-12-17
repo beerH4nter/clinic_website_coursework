@@ -25,8 +25,13 @@ public class AppointmentMapper {
 
     public Appointment toRequest(AppointmentDTO appointmentDTO) {
 
-        Disease disease = diseasesRepository.findById(appointmentDTO.getDiseaseId()).orElseThrow(() ->
-                new RuntimeException("Disease with ID " + appointmentDTO.getDiseaseId() + " not found"));
+        Disease disease = diseasesRepository.findById(appointmentDTO.getDiseaseId()).orElse(null);
+
+//                .orElseThrow(() ->
+//                        new RuntimeException("Disease with ID " + appointmentDTO.getDiseaseId() + " not found"));
+
+
+
 
         Doctor doctor = doctorsRepository.findById(appointmentDTO.getDoctorId()).orElseThrow(() ->
                 new RuntimeException("Doctor with ID " + appointmentDTO.getDoctorId() + " not found"));
@@ -63,7 +68,7 @@ public class AppointmentMapper {
         appointmentDTO.setDoctorNotes(appointment.getDoctorNotes());
         appointmentDTO.setPatientSurname(appointment.getPatient().getSurname());
         appointmentDTO.setDoctorSurname(appointment.getDoctor().getSurname());
-        appointmentDTO.setDiseaseName(appointment.getDisease().getName());
+//        appointmentDTO.setDiseaseName(appointment.getDisease().getName());
         return appointmentDTO;
 
     }

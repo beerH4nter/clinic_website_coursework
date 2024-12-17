@@ -9,32 +9,37 @@ const AppointmentsPage = () => {
     const [error, setError] = useState(null);
     const [tab, setTab] = useState("current");
 
-    alert(`${user.id}`);
-    console.log(user);
-
     const fetchAppointments = async (statusFilter) => {
-        if (!user || !user.id) return; // Проверяем, что пользователь существует и имеет id
+        if (!user || !user.id) return;
 
         setLoading(true);
         setError(null);
 
         try {
-            const response = await fetch(`http://localhost:8080/appointment/findByPatient?patientId=${user.id}`);
-            alert(`${user.id}`);
+            const response = await fetch(`http://localhost:8080/appointment/findByPatient?id=${user.id}`);
+            console.log("Response status:", response.status); // Для отладки
 
             if (!response.ok) {
-                throw new Error("Ошибка при загрузке данных.");
+                throw new Error(`Ошибка: ${response.statusText}`);
             }
 
             const data = await response.json();
+            console.log("Response data:", data); // Для отладки
+
+            if (!Array.isArray(data)) {
+                throw new Error("Некорректный формат данных от сервера.");
+            }
+
             const filteredData =
                 statusFilter === "current" ? data.filter((item) => ["SHEDULED", "IN_PROGRESS"].includes(item.status)) : data.filter((item) => ["COMPLETED", "CANCELED"].includes(item.status));
 
-            setAppointments(filteredData); // Устанавливаем записи
+            setAppointments(filteredData);
         } catch (err) {
+            console.error("Ошибка при получении записей:", err.message);
             setError(err.message);
         } finally {
-            setLoading(false); // Останавливаем загрузку
+            setLoading(false);
+            console.log("Загрузка завершена"); // Для отладки
         }
     };
 

@@ -6,12 +6,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Data
 public class PatientDTO {
+
+
+    int id;
 
     @NotEmpty(message = "name can not be empty")
     private String name;

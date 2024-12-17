@@ -43,6 +43,7 @@ public class PatientMapper {
         PatientDTO patientDTO = new PatientDTO();
 
 
+        patientDTO.setId(patient.getId());
         patientDTO.setName(patient.getName());
         patientDTO.setSurname(patient.getSurname());
         patientDTO.setPatronymic(patient.getPatronymic());
