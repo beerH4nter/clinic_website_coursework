@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Appointment {
 
     @Id
@@ -38,20 +37,21 @@ public class Appointment {
     private Status status;
 
     @NotEmpty(message = "diagnose can noe be empty")
-    @Column(length = 512)
+    @Column(length = 1024)
     private String diagnose;
 
+    @Column(length = 4096)
     private String doctorNotes;
 
     @Column(length = 512)
     private String drugs;
 
     @ManyToOne
-    @JoinColumn(name = "patientId")
+    @JoinColumn(name = "patientId", nullable = false)
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "doctorId")
+    @JoinColumn(name = "doctorId", nullable = false)
     private Doctor doctor;
 
 

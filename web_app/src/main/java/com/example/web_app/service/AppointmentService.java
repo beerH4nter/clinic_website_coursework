@@ -50,12 +50,12 @@ public class AppointmentService {
                 .build();
     }
 
-    public Appointment mapAppointmentAddDTOToEntity(AppointmentAddDTO appointmentAddDTO){
+    private Appointment mapAppointmentAddDTOToEntity(AppointmentAddDTO appointmentAddDTO){
         Appointment appointment = new Appointment();
         String[] doctorFullNameArray = appointmentAddDTO.getDoctorFullName().split(" ");
         appointment.setDateTime(appointmentAddDTO.getDateTime());
         appointment.setDoctor(doctorsRepository
-                .findByFirstNameAndLastNameAndMiddleNameAndPosition(
+                .findByNameAndSurnameAndPatronymicAndPosition(
                         doctorFullNameArray[0],
                         doctorFullNameArray[1],
                         doctorFullNameArray[2],

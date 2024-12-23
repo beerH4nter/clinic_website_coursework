@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface DoctorsRepository extends JpaRepository<Doctor, Integer> {
 
     Optional<Doctor> findByName(String name);
-    Optional<Doctor> findByFirstNameAndLastNameAndMiddleNameAndPosition(
+    Optional<Doctor> findByNameAndSurnameAndPatronymicAndPosition(
             String firstName,
             String lastName,
             String middleName,
