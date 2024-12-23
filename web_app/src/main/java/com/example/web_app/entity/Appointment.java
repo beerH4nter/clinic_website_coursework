@@ -54,4 +54,5 @@ public class Appointment {
     @JoinColumn(name = "doctorId")
     private Doctor doctor;
 
+
 }

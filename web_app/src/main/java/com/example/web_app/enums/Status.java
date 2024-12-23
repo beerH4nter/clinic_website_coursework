@@ -9,7 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Status {
-    SHEDULED("sheduled"),
+    SCHEDULED("scheduled"),
     COMPLETED("completed"),
     CANCELED("canceled"),
     IN_PROGRESS("in progress");
