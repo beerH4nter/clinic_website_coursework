@@ -23,7 +23,7 @@ public class PrescriptionService {
                 .build();
     }
     public List<PrescriptionItemListDTO> getAllByPatientId(Long patientId) {
-        return repository.findPrescriptionsByPatientId(patientId).stream()
+        return repository.findAllByPatientId(patientId).stream()
                 .map(this::mapToPrescriptionItemListDTO)
                 .collect(Collectors.toList());
     }

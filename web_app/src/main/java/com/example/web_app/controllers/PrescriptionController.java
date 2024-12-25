@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/prescription")
 @RequiredArgsConstructor
-public class PrescriptionsController {
+public class PrescriptionController {
 
     private final PrescriptionService service;
 
