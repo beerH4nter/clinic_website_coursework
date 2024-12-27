@@ -39,5 +39,10 @@ public class AppointmentController {
         service.add(appointmentAddDTO);
     }
 
+    @DeleteMapping("/{appointmentId}")
+    public void deleteAppointment(@PathVariable Long appointmentId){
+        service.delete(appointmentId);
+    }
+
 
 }

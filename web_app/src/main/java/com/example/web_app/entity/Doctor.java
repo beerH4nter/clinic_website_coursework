@@ -44,7 +44,6 @@ public class Doctor {
     private String dateOfBirth;
 
     @NotEmpty(message = "email can not be empty")
-    @UniqueElements
     private String email;
 
     @NotEmpty(message = "password can not be empty")

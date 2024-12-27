@@ -5,16 +5,14 @@ import com.example.web_app.dto.AppointmentAddDTO;
 import com.example.web_app.dto.AppointmentDTO;
 import com.example.web_app.dto.AppointmentItemListDTO;
 import com.example.web_app.entity.Appointment;
+import com.example.web_app.entity.Patient;
 import com.example.web_app.enums.Reason;
 import com.example.web_app.enums.Status;
 import com.example.web_app.repositories.AppointmentsRepository;
 import com.example.web_app.repositories.DoctorsRepository;
-import lombok.Getter;
+import com.example.web_app.repositories.PatientsRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -25,8 +23,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AppointmentService {
 
-    private final AppointmentsRepository repository;
+    private final AppointmentsRepository appointmentsRepository;
     private final DoctorsRepository doctorsRepository;
+    private final PatientsRepository patientsRepository;
 
     private AppointmentItemListDTO mapToAppointmentItemListDTO(Appointment appointment){
         return AppointmentItemListDTO.builder()
@@ -52,6 +51,7 @@ public class AppointmentService {
 
     private Appointment mapAppointmentAddDTOToEntity(AppointmentAddDTO appointmentAddDTO){
         Appointment appointment = new Appointment();
+        Patient patient = patientsRepository.getById(appointmentAddDTO.getPatientId());
         String[] doctorFullNameArray = appointmentAddDTO.getDoctorFullName().split(" ");
         appointment.setDateTime(appointmentAddDTO.getDateTime());
         appointment.setDoctor(doctorsRepository
@@ -61,16 +61,18 @@ public class AppointmentService {
                         doctorFullNameArray[2],
                         appointmentAddDTO.getDoctorPosition()).orElseThrow(EntityNotFoundException::new)
                 );
+        appointment.setPatient(patient);
         appointment.setReason(Reason.fromValue(appointmentAddDTO.getReason()));
         appointment.setStatus(Status.SCHEDULED);
         appointment.setDiagnose(null);
+
         appointment.setDrugs(null);
         appointment.setDoctorNotes(null);
         return appointment;
     }
 
     public List<AppointmentItemListDTO> getAllCurrentByPatient(Long patientId) {
-        return repository.findAllByPatientId(patientId).stream()
+        return appointmentsRepository.findAllByPatientId(patientId).stream()
                 .filter(x -> Objects.equals(x.getStatus().getContext(), "scheduled"))
                 .map(this::mapToAppointmentItemListDTO)
                 .collect(Collectors.toList());
@@ -78,7 +80,7 @@ public class AppointmentService {
 
 
     public List<AppointmentItemListDTO> getAllExpiredByPatient(Long patientId) {
-        return repository.findAllByPatientId(patientId).stream()
+        return appointmentsRepository.findAllByPatientId(patientId).stream()
                 .filter(x -> Objects.equals(x.getStatus().getContext(), "canceled") || Objects.equals(x.getStatus().getContext(), "completed"))
                 .map(this::mapToAppointmentItemListDTO)
                 .collect(Collectors.toList());
@@ -86,10 +88,14 @@ public class AppointmentService {
 
 
     public AppointmentDTO getById(Long id) {
-        return mapToAppointmentDTO(repository.getById(id));
+        return mapToAppointmentDTO(appointmentsRepository.getById(id));
     }
 
     public void add(AppointmentAddDTO appointmentAddDTO) {
-        repository.save(mapAppointmentAddDTOToEntity(appointmentAddDTO));
+        appointmentsRepository.save(mapAppointmentAddDTOToEntity(appointmentAddDTO));
+    }
+
+    public void delete(Long id){
+        appointmentsRepository.deleteById(id);
     }
 }

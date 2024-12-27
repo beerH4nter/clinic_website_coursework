@@ -41,7 +41,7 @@ public class AuthenticationService {
         }
 
         Patient patient = mapRegisterDTOToEntity(registerDTO);
-
+        System.out.println(patient.toString());
         return repository.save(patient); // Сохраняем пациента
     }
 
