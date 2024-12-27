@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -25,15 +26,12 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "date or time can not be empty")
     private LocalDateTime dateTime;
 
     @Convert(converter = ReasonConverter.class)
-    @NotEmpty(message = "reason can not be empty")
     private Reason reason;
 
     @Convert(converter = StatusConverter.class)
-    @NotEmpty(message = "status can not be empty")
     private Status status;
 
     @NotEmpty(message = "diagnose can noe be empty")

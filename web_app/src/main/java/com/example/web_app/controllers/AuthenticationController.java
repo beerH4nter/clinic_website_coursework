@@ -37,4 +37,6 @@ public class AuthenticationController {
         return ResponseEntity.ok(patient);
     }
 
+
+
 }

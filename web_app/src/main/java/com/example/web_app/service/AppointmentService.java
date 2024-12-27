@@ -63,7 +63,7 @@ public class AppointmentService {
                 );
         appointment.setPatient(patient);
         appointment.setReason(Reason.fromValue(appointmentAddDTO.getReason()));
-        appointment.setStatus(Status.SCHEDULED);
+        appointment.setStatus(Status.fromValue("scheduled"));
         appointment.setDiagnose(null);
 
         appointment.setDrugs(null);

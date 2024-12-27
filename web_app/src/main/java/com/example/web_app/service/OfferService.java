@@ -44,4 +44,17 @@ public class OfferService {
     public OfferDTO findById(Long id) {
         return mapToOfferDTO(repository.getById(id));
     }
+
+//    public OfferDTO create(OfferDTO dto) {
+//
+//    }
+//
+//    public OfferDTO update(Long id, OfferDTO dto) {
+//    }
+//
+//    public void delete(Long id) {
+//    }
+//
+//    public List<OfferDTO> getAllOffers() {
+//    }
 }

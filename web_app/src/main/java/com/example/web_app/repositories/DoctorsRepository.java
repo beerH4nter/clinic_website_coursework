@@ -11,9 +11,9 @@ public interface DoctorsRepository extends JpaRepository<Doctor, Integer> {
 
     Optional<Doctor> findByName(String name);
     Optional<Doctor> findByNameAndSurnameAndPatronymicAndPosition(
-            String firstName,
-            String lastName,
-            String middleName,
+            String name,
+            String surname,
+            String patronymic,
             String position
     );
 
